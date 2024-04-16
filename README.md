@@ -2,9 +2,9 @@
 This is a product for creators to instantly create a landing page for their videos. And it also provides a custom chat support for your videos which answers users questions in real time.
 
 ## TODOS
-- [ ] Initialize project (w/ t3-stack)
-- [ ] Upload to github (w/ github)
-- [ ] Deploy to vercel (w/ vercel)
+- [x] Initialize project (w/ t3-stack)
+- [x] Upload to github (w/ github)
+- [x] Deploy to vercel (w/ vercel)
 - [ ] Builing Mockup UI
   - [ ] Create Landing Page
   - [ ] Creator Page (for users to see all creator videos)
