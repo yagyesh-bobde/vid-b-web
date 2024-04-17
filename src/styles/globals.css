@@ -22,6 +22,40 @@
     @apply bg-[#8830F7];
 }
 
+.bg-blue{
+    @apply bg-[#30C7F7];
+}
+
+.bg-light-blue{ 
+    @apply bg-[#4FBCFE];
+}
+
+.bg-lighter-blue {
+    @apply bg-[#CBEFFF];
+}
+
+.bg-pink{
+    @apply bg-[#F7A8D0];
+}
+
+.bg-light-pink{
+    @apply bg-[#FFE8F7];
+}
+
+.bg-lighter-pink{
+    @apply bg-[#FFF3FF];
+}
+
+.bg-darkBlue {
+    @apply bg-[#4C30F7];
+}
+.bg-light-darkBlue{
+    @apply bg-[#826EEF];
+}
+.bg-lighter-darkBlue{
+    @apply bg-[#AEA1F2];
+}
+
 .border-purple{
     @apply border border-[#8830F7];
 }
@@ -99,5 +133,10 @@
 .absolute-h-center{
     @apply absolute left-1/2 right-1/2 -translate-x-1/2;
 }
+}
 
+
+
+.shadow-gray {
+        box-shadow: 0px -21px 30px 0px rgba(0, 0, 0, 0.1);
 }

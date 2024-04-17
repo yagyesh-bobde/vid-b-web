@@ -70,8 +70,8 @@ const content = {
                 },
                 {
                     "id": 3, 
-                    "title": "Boost",
-                    "desc": "Boost your tweets to reach a wider audience and increase engagement", 
+                    "title": "Influencer collaboration",
+                    "desc": "Partner with influencers or bloggers who have a strong following in your target market to promote the product on their social media accounts.", 
                     "button": "Join Free ->",
                     "type": 2
                 }

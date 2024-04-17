@@ -54,7 +54,7 @@ const Hero = () => {
                     </p>
                     </div>
                 </div>
-                <div className='w-responsive bg-white min-h-[50vh] rounded-xl shadow-t-xl'> </div>
+                <div className='w-responsive shadow-gray bg-white min-h-[50vh] rounded-xl shadow-t-xl'> </div>
                </div>
             </div>
 
