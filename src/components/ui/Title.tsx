@@ -41,7 +41,7 @@ interface SubTitleProps {
 export const SubTitle = ({ subTitleClass, children }: SubTitleProps) => {
   return (
     <p
-      className={`mx-auto font-semibold leading-relaxed text-center text-[#595D61] text-md md:text-lg ${subTitleClass}`}
+      className={`mx-auto font-medium leading-relaxed text-center text-md md:text-lg ${subTitleClass}`}
     >
       {children}
     </p>

@@ -8,27 +8,32 @@ const content = {
                 {
                     "id": 1, 
                     "title": "Home",
-                    "url": "/"
+                    "url": "/",
+                    "active": true
                 }, 
                 {
                     "id": 2, 
                     "title": "Features",
-                    "url": "#features"
+                    "url": "#features",
+                    "active": false
                 },
                 {
                     "id": 3,
                     "title": "Pricing",
-                    "url": "#pricing"
+                    "url": "#pricing",
+                    "active": false
                 },
                 {
                     "id": 4,
                     "title": "Testimonials",
-                    "url": "#testimonials"
+                    "url": "#testimonials",
+                    "active": false
                 },
                 {
                     "id": 5,
                     "title": "Chrome extension",
-                    "url": "#extension"
+                    "url": "#extension",
+                    "active": false
                 }
             ],
             "button": 
@@ -43,7 +48,8 @@ const content = {
         "hero": {
             "title": ["Simplify your daily", "routine."],
             "subtitle": "With its sleek design and advanced features at more convenient way.",
-            "button": "Get Started ->"
+            "button": "Get Started ->",
+            "more": "More 200+ users are having more fun"
         },
         "steps":{
             "title": ["Three", "easy steps"],
