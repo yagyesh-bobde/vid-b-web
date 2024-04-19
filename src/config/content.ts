@@ -59,21 +59,27 @@ const content = {
                     "title": "User-generated content",
                     "desc": "Encourage customers to share photos or videos of themselves using the product and tag your brand", 
                     "button": "Join Free ->",
-                    "type": 1
+                    "type": 1,
+                    "boxOut" : "bg-light-blue",
+                    "boxIn" : "bg-lighter-blue"
                 },
                 {
                     "id": 2, 
                     "title": "Product photos/ videos",
                     "desc": "Share high-quality photos or videos of the product, showcasing its features and benefits.", 
                     "button": "Join Free ->",
-                    "type": 2
+                    "type": 2,
+                    "boxOut" : "bg-light-pink",
+                    "boxIn" : "bg-lighter-pink"
                 },
                 {
                     "id": 3, 
                     "title": "Influencer collaboration",
                     "desc": "Partner with influencers or bloggers who have a strong following in your target market to promote the product on their social media accounts.", 
                     "button": "Join Free ->",
-                    "type": 2
+                    "type": 2,
+                    "boxOut" : "bg-light-darkBlue",
+                    "boxIn" : "bg-lighter-darkBlue"
                 }
             ]
         },

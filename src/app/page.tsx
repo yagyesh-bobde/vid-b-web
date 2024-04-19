@@ -12,8 +12,10 @@ export default function HomePage() {
       <Header />
       <div className="space-y-32">
         <Hero />
-        <Steps />
-        <KeyFeatures />
+        <div className="space-y-44">
+          <Steps />
+          <KeyFeatures />
+        </div>
         <EarlyAdopters />
         <Subscribe />
         <Footer />

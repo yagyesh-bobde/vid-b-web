@@ -10,7 +10,7 @@ const KeyFeatures = () => {
             <div className='space-y-8'>
                 {/* title & subtitle */}
                 <div className='space-y-4'>
-                    <Title className='text-start'>
+                    <Title className='lg:text-start'>
                         {keyFeatures.title[0]}{" "}<span className='text-purple'>{keyFeatures.title[1]}</span>
                     </Title>
                     <p>

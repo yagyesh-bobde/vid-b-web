@@ -15,6 +15,13 @@ const Hero = () => {
                 fill
                 className='absolute top-0 left-0 w-full h-full -z-10'
             />
+
+            {/* ICONS */}
+            <Image src={"/icons/decorations/icon-1.svg"} alt="icon" width={60} height={60}  className="max-lg:hidden rounded-xl lg:left-24 absolute z-10" />
+            <Image src={"/icons/decorations/icon-2.svg"} alt="icon" width={60} height={60}  className="max-lg:hidden rounded-xl lg:right-24 absolute z-10" />
+            <Image src={"/icons/decorations/icon-3.svg"} alt="icon" width={60} height={60}  className="max-lg:hidden rounded-xl lg:top-80 lg:left-80 absolute z-10" />
+            <Image src={"/icons/decorations/icon-4.svg"} alt="icon" width={60} height={60}  className="max-lg:hidden rounded-xl lg:top-80 lg:right-80 absolute z-10" />
+
             
             
             <Title variant='xl' className=''>
