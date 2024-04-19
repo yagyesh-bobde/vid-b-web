@@ -78,7 +78,7 @@ const content = {
             ]
         },
         "keyFeatures": {
-            "title": ["How to use the product with some of its key features."],
+            "title": ["How to use the product with some of its", "key features."],
             "subtitle": "",
             "features": [
                 "AI Powered Tweet Writer",
