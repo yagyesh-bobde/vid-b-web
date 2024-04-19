@@ -28,7 +28,7 @@ const Subscribe = () => {
 
             {/* form */}
             <div className="form-group lg:w-1/2 mx-auto flex-center gap-4">
-                <input type="email" placeholder="Enter your email" className="p-3 rounded-xl w-[285px]" />
+                <input type="email" placeholder="Enter your email" className="p-3 px-5 rounded-xl w-[285px] border border-[#dcdcdc]" />
                 <button className="bg-purple text-white px-6 py-3 rounded-xl font-semibold shadow-xl hover:scale-105 duration-200">{subscribe.button}</button>
             </div>
         </div>
