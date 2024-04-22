@@ -21,7 +21,9 @@ const Header = () => {
                 ))}
             </ul>
             <Button className='flex-center gap-5'>
+                <Link href="/video/1">
                 {header.button.title}
+                </Link>
             </Button>
         </nav>
     )
