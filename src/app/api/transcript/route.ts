@@ -1,12 +1,26 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { eq } from "drizzle-orm";
+import functions from "~/lib/helpers";
+import { db } from "~/server/db";
+import { transcriptions } from "~/server/db/dist/schema";
 
-export default function GET(req: NextApiRequest, res: NextApiResponse) {
-    try {
-        // Your code here
+interface RequestBody {
+    accessToken: string,
+    conversationId: string
+}
 
-        res.status(200).json({ message: 'Success' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
+
+export async function POST(request: Request) {
+    // get accessToken from request body
+    const reqBody : RequestBody = await request.json() as RequestBody;
+
+    const response = await functions.getTranscription(reqBody.accessToken, reqBody.conversationId);
+
+    // store transcript in database
+    await db.update(transcriptions).set({
+        transcription: response
+    })
+    .where(eq(transcriptions.conversationId, reqBody.conversationId))
+
+    return Response.json({ status: true, message: "ok"})
+    
 }

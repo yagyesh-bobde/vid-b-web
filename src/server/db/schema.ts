@@ -24,11 +24,11 @@ export const transcriptions = createTable(
   {
     id: serial("id").primaryKey(),
     // userId: varchar("userId", { length: 255 }).notNull().references(() => users.id),
-    audioUrl: varchar("audio", { length: 255 }).notNull(),
-    youtubeUrl: varchar("youtubeUrl", { length: 255 }).notNull(),
-    conversationId: varchar("conversationId", { length: 255 }).notNull(),
-    jobId: varchar("jobId", { length: 255 }).notNull(),
-    transcription: text("transcription").notNull(),
+    audioUrl: varchar("audioUrl", { length: 255 }).notNull().unique(),
+    videoId: varchar("videoId", { length: 255 }).notNull().unique(),
+    conversationId: varchar("conversationId", { length: 255 }),
+    jobId: varchar("jobId", { length: 255 }),
+    transcription: text("transcription"),
     createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
     updatedAt: timestamp("updatedAt"),
   }

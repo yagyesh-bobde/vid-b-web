@@ -1,39 +1,29 @@
-"use client";
-
-import { access } from "fs";
-
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-const getAndStoreAudio = async(vid: string): Promise<string> => {
-            if(!vid) {
-                // TODO: TOAST INVALID YOUTUBE URL
-                return "error"
-            }
 
-            const url = 'https://youtube-mp3-downloader2.p.rapidapi.com/ytmp3/ytmp3/?url=%3CREQUIRED%3E';
-            const options = {
-                method: 'GET',
-                headers: {
-                    'X-RapidAPI-Key': '5be64915c7mshabd0016d04022d8p114e85jsn81b59b6abb85',
-                    'X-RapidAPI-Host': 'youtube-mp3-downloader2.p.rapidapi.com'
-                }
-            };
+import { env } from "~/env";
 
-            try {
-                const response = await fetch(url, options);
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                const json = await response.json();
-                console.log(json);
 
-                return json.dlink;
-            } catch (error) {
-                console.error(error);
-                // random url
-                return "error"
-            }
+const getFullPath = (path: string) => {
+    return env.SUPABASE_URL + "/storage/v1/object/public/" + env.SUPABASE_AUDIO_BUCKET_NAME + "/" + path;
+}
+
+function extractYouTubeVideoId(url: string) {
+    // Regular expression to match YouTube video URL patterns
+    try {
+        const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    
+        // Execute the regular expression on the URL
+        const match = url.match(regExp);
+
+        // If there's a match, return the video ID, otherwise return string
+        return match ? match[1] : url;
+    } catch (error) {
+        return url;
     }
+}
 
 
 
@@ -45,8 +35,8 @@ const getAuthToken = async (): Promise<string> => {
     }, 
     body: JSON.stringify({
         "type": "application",
-        "appId": process.env.NEXT_PUBLIC_SYMBL_ID!,
-        "appSecret": process.env.NEXT_PUBLIC_SYMBL_SECRET!
+        "appId": env.SYMBL_ID,
+        "appSecret": env.SYMBL_SECRET
     })
   });
 
@@ -65,6 +55,7 @@ const getConversationId = async (url: string) : Promise<{
     const accessToken = await getAuthToken();
     if(!accessToken) {
         // TODO: TOAST TRY AGAIN
+        console.log('no token')
         return {
             accessToken: '',
             conversationId: '',
@@ -95,7 +86,10 @@ const getConversationId = async (url: string) : Promise<{
     const responseBody = await response.json();
     
     // In case failed return empty object
+    console.log(responseBody)
     if (responseBody.message){
+        console.log("failed")
+        console.log(response)
         return ({
             accessToken: '',
             conversationId: '',
@@ -120,7 +114,7 @@ const isJobDone = async(token: string, jobId: string) : Promise<string> => {
         }
     })
     const data = await response.json();
-    console.log(data); // data - id, status(completed, failed, in_progress)
+    // console.log(data); // data - id, status(completed, failed, in_progress)
     return data.status;
 }
 
@@ -144,36 +138,18 @@ const getTranscription = async(token: string, conversationId: string) : Promise<
         const data = await fetch(`https://api.symbl.ai/v1/conversations/${conversationId}/transcript`, requestOptions)
         
         const json = await data.json();
-        console.log(json);
         return json.transcript.payload;
-    
-    // const response = await fetch(`https://api.symbl.ai/v1/conversation/${conversationId}/transcript`,{
-    //     method: "POST",
-    //     headers: {
-    //         "x-api-key" : token,
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         "contentType": "text/markdown",
-    //         "showSpeakerSeparation": true
-    //     })
-    // })
-
-    // const data = await response.json();
-
-    // console.log(data);
-    // return data.transcript.payload;
-
-
-
-
 }
+
+
+
 const functions = {
-    getAndStoreAudio,
     getAuthToken, 
     getConversationId,
     isJobDone,
     getTranscription,
+    extractYouTubeVideoId,
+    getFullPath
 }
 
 export default functions;
