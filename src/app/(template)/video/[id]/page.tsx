@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { BiQuestionMark } from "react-icons/bi";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import Chat from "~/components/Chat/Chat";
 import Transcript from "~/components/Transcript/Transcript";
@@ -14,9 +14,9 @@ const Page = () => {
   const [showMobileChat, setshowMobileChat] = useState(false);
 
 
-  if(!router.query.id) {
-    return router.push("/generate");
-  }
+  // if(!router.query.id) {
+  //   return router.push("/generate");
+  // }
 
   return (
     <div className="flex h-full w-screen  bg-black text-white">
@@ -24,12 +24,12 @@ const Page = () => {
         <h2 className="text-xl font-semibold">
           Video Title: A Sample Video Title
         </h2>
-        <iframe
+        {/* <iframe
           width="420"
           height="315"
           className="h-1/2 min-h-[50vh] w-full"
           src={`https://www.youtube.com/embed/${router.query.id.toString()}`}
-        ></iframe>
+        ></iframe> */}
         <Transcript transcript={transcript} />
       </div>
 
