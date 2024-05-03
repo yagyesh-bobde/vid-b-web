@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "~/components/ui/Button";
+import fetchTranscript from "~/lib/helpers/transcript";
 
 const Page = () => {
   const [loading, setloading] = useState({
@@ -13,15 +14,18 @@ const Page = () => {
   const handleSubmit = async () => {
     setloading({ isLoading: true, message: "Converting to audio..." });
     try {
-      // getting transcription
-
-      // make a entry in database
+        const res = await fetchTranscript("WIeJF3kL5ng");
+        console.log(res);
 
     }catch (error) {
       setloading({ isLoading: false, message: "Something went wrong. Please try again." });
       setvideoUrl("");
     }
   }
+
+  useEffect(() => {
+    handleSubmit().then((res) => console.log(res)).catch((err) => console.log(err));
+  }, [])
 
   return (
     <div className="relative grid h-screen place-content-center bg-black">

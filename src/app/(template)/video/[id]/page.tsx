@@ -30,17 +30,16 @@ const Page = ( ) => {
     // Set the id state
     setId(lastPart ?? "");
 
-
+    submit()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }, []);
 
 
-  // const fetchTranscript = async (id: string) => {
-  //   const res = await YoutubeTranscript.fetchTranscript(id);
-  //   console.log(res)
-  //   // const json = await res.json();
-  //   // console.log(json)
-  // }
-
+  const submit = async () => {
+    const res = await fetchTranscript("WIeJF3kL5ng");
+    console.log(res)
+  }
   return (
     <div className="flex h-full w-screen  bg-black text-white">
       <div className="video flex h-full flex-col space-y-4  p-8 md:w-3/4">
