@@ -39,7 +39,7 @@ const Chat = ({
     return (
         <div className={`max-md:fixed top-0 left-0 right-0 bottom-0 chat md:w-1/4 flex flex-col bg-black md:bg-white/10 p-8 ${showMobileChat ? "z-10" : ""}`}>
             <div className='flex flex-col h-[95vh] sticky top-5'>
-                <CgClose className='' />
+                <CgClose className='md:hidden' />
                 <h2 className='text-xl font-semibold '>Ask Expert</h2>
                 {
                     !chatResponse && 
