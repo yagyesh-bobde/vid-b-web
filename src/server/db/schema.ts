@@ -19,6 +19,21 @@ import { type AdapterAccount } from "next-auth/adapters";
  */
 export const createTable = pgTableCreator((name) => `vid-b-web_${name}`);
 
+export const transcriptions = createTable(
+  "transcriptions",
+  {
+    id: serial("id").primaryKey(),
+    // userId: varchar("userId", { length: 255 }).notNull().references(() => users.id),
+    audioUrl: varchar("audioUrl", { length: 255 }).notNull().unique(),
+    videoId: varchar("videoId", { length: 255 }).notNull().unique(),
+    conversationId: varchar("conversationId", { length: 255 }),
+    jobId: varchar("jobId", { length: 255 }),
+    transcription: text("transcription"),
+    createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
+    updatedAt: timestamp("updatedAt"),
+  }
+)
+
 export const posts = createTable(
   "post",
   {

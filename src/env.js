@@ -8,9 +8,17 @@ export const env = createEnv({
    */
   server: {
     DATABASE_URL: z.string().url(),
+    // RAPID_API_KEY: z.string(),
+    // RAPID_API_HOST: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    SYMBL_ID: z.string(),
+    SYMBL_SECRET: z.string(),
+    GEMINI_API_KEY : z.string(),
+    SUPABASE_URL: z.string(),
+    SUPABASE_ANON_KEY: z.string(),
+    SUPABASE_AUDIO_BUCKET_NAME: z.string(),
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"
         ? z.string()
@@ -39,6 +47,12 @@ export const env = createEnv({
    */
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
+    SYMBL_ID: process.env.SYMBL_ID,
+    SYMBL_SECRET: process.env.SYMBL_SECRET,
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+    SUPABASE_AUDIO_BUCKET_NAME: process.env.SUPABASE_AUDIO_BUCKET_NAME,
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
