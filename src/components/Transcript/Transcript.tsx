@@ -1,67 +1,59 @@
+
+
 import { eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
+import fetchTranscript, { fetchTranscriptionRows } from '~/lib/helpers/transcript';
 import { db } from '~/server/db';
+import { useRouter } from 'next/navigation';
 import { transcriptRows, transcriptions } from '~/server/db/schema';
+import { TranscriptProps } from '~/app/(template)/video/[id]/page';
+import { BiSolidShareAlt } from "react-icons/bi";
 
 
 
-const Transcript = ({ videoId }: { videoId: string }) => {
 
-    const [res, setres] = useState([]) 
-    const fetchTranscript = async (id: string) => {
-            const transcript = await db
-                .select()
-                .from(transcriptRows)
-                .where(eq(transcriptions.videoId, id));
-            
-            // setres(transcript);
-            console.log(transcript)
-            return transcript;
-    }
-    
-    
-  useEffect(() => {
-         fetchTranscript(videoId)
-         .then(res => {
-            // setres(res)
-         })
-         .catch(err => {
-            console.log(err)
-         })
-  }, [])
-
+const Transcript = ({ transcripts }: { transcripts: TranscriptProps[] }) => {
+  const router = useRouter();
 
   return (
-    <div className="transcript h-1/4 space-y-5">
+    <div className="transcript overflow-y-scroll max-h-[400px] space-y-5">
       <div className="flex-center-between">
         <h2 className="cursor-pointer text-xl font-semibold lg:text-2xl">
           Transcript
         </h2>
-        <h2 className="text-md cursor-pointer font-semibold opacity-50 lg:text-lg">
-          Resources
-        </h2>
+        <div className='flex items-center gap-5'>
+          <BiSolidShareAlt className='text-xl cursor-pointer'/>
+          <h2 className="text-md cursor-pointer font-semibold opacity-50 lg:text-lg">
+            Resources
+          </h2>
+        </div>
       </div>
       <div className="pb-5 text-xl leading-10">
-        {res.map((item: typeof transcriptRows, index: number) => {
-            console.log("res", res)
-            
-            
-        return (
-            <div key={index}>
-                00:00 -{" "} - alksdjflask;jdf
-                
-                {/* <span>
-                    {formatTime(parseFloat(item.offset))} -{" "}
-                    {formatTime(
-                        parseFloat(item.offset.toString()) + parseFloat(item.duration.toString()),
-                    )}
-                </span>
-                :{" "}
-                <span className="leading-relaxed tracking-wider">
-                    {item.transcriptText}
-                </span> */}
+        {
+          transcripts.length === 0 && (
+            <div className='w-[50px] h-[50px] rounded-full bg-black border-t-2 animate-spin'>
+
             </div>
-        );
+          )
+        }
+        {transcripts.map((item: TranscriptProps, index: number) => {
+          return (
+            <div key={index} className="flex items-center flex-wrap gap-4 md:gap-8">
+              {/* 00:00 - - alksdjflask;jdf */}
+              <div className="text-sm md:text-md font-mono font-bold">
+                {formatTime(parseFloat(item.offset))} -{" "}
+                {formatTime(
+                  parseFloat(item.offset.toString()) +
+                    parseFloat(item.duration.toString()),
+                )}
+                :{" "}
+              </div>
+
+              <div className="leading-relaxed tracking-wider text-white/80">
+                {item.transcriptText}
+              </div>
+            </div>
+          );
         })}
       </div>
     </div>

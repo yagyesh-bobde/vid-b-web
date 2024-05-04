@@ -5,7 +5,16 @@ import React from 'react'
 import { TranscriptResponse } from 'youtube-transcript';
 
 const page = async () => {
-    const response = await fetch("/api/transcript?id=S_F_c9e2bz4");
+  
+    const response = await fetch("/api/transcript", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: "S_F_c9e2bz4",
+      }),
+    });
     
     const data = await response.json() as Promise<{
       status: boolean;

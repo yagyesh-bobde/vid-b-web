@@ -8,65 +8,126 @@ import { textTotext } from '~/lib/helpers/gemini';
 
 
 const Chat = ({
-    showMobileChat = false
+  showMobileChat,
+  setshowMobileChat,
 }: {
-    showMobileChat: boolean
+  showMobileChat: boolean;
+  setshowMobileChat : (showMobileChat: boolean) => void
 }) => {
-    const response = ["Have a doubt in this video?", "What does this word mean?", "How do I use this?", "I don't understand this", "What is video about?", "Explain this to me", "I don't this concept", "Summary of video?"]
-    
-    const [input, setinput] = useState("")
-    const [chatResponse, setchatResponse] = useState("")
-    const [isLoading, setisLoading] = useState(false)    
+  const response = [
+    "Have a doubt in this video?",
+    "What does this word mean?",
+    "How do I use this?",
+    "I don't understand this",
+    "What is video about?",
+    "Explain this to me",
+    "I don't this concept",
+    "Summary of video?",
+  ];
 
+  const [input, setinput] = useState("");
+  const [chatResponse, setchatResponse] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
-    const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-           const text = await textTotext(input)
-        
-            setchatResponse(text + "\n") 
-            setinput("")
-        }
+  const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const text = await textTotext(input);
+
+      setchatResponse(text + "\n");
+      setinput("");
     }
+  };
 
-    const handleButtonClick = async() => {
-        const text = await textTotext(input)
-        
-        setchatResponse(text + "\n")
-        setinput("")
-    }
-    
-    
-    return (
-        <div className={`max-md:fixed top-0 left-0 right-0 bottom-0 chat md:w-1/4 flex flex-col bg-black md:bg-white/10 p-8 ${showMobileChat ? "z-10" : ""}`}>
-            <div className='flex flex-col h-[95vh] sticky top-5'>
-                <CgClose className='md:hidden' />
-                <h2 className='text-xl font-semibold '>Ask Expert</h2>
-                {
-                    !chatResponse && 
+  const handleButtonClick = async () => {
+    const text = await textTotext(input);
 
-                    <div className='space-y-4 flex-1 py-10'>
-                        {
-                            response.map((item, index) => {
-                                return(
-                                    <p key={index} className='italic text-gray-400'>{item}</p>
-                                )
-                            })
-                        }
-                    </div>
-                }
-                <div className='space-y-4 flex-1 py-10'>
-                    {chatResponse}
-                </div>
-                <div className=' flex-center-between border-2 border-gray-400 w-full rounded-full py-2 px-4'>
-                    <input value={input} onChange={
-                        (e) => setinput(e.target.value)
-                    } onKeyDown={handleEnter} type="text" className='bg-transparent focus:outline-none active:outline-none' placeholder="Ask a question..." />
+    setchatResponse(text + "\n");
+    setinput("");
+  };
 
-                    <IoMdSend onClick={handleButtonClick} className='cursor-pointer' />
-                </div>
+  return (
+    <>
+      {
+      !showMobileChat ? 
+        <div
+          className={`p-8 max-md:hidden md:w-1/4 md:bg-white/10 ${showMobileChat ? "z-10" : ""}`}
+        >
+          <div className="sticky top-5  flex h-[95vh] flex-col">
+            <CgClose
+              className="absolute right-5 z-50 cursor-pointer text-xl md:hidden"
+              onClick={() => setshowMobileChat(!showMobileChat)}
+            />
+            <h2 className="text-xl font-semibold ">Ask Expert</h2>
+            {!chatResponse && (
+              <div className="flex-1 space-y-4 py-10">
+                {response.map((item, index) => {
+                  return (
+                    <p key={index} className="italic text-gray-400">
+                      {item}
+                    </p>
+                  );
+                })}
+              </div>
+            )}
+            <div className="flex-1 space-y-4 py-10">{chatResponse}</div>
+            <div className=" flex-center-between w-full rounded-full border-2 border-gray-400 px-4 py-2">
+              <input
+                value={input}
+                onChange={(e) => setinput(e.target.value)}
+                onKeyDown={handleEnter}
+                type="text"
+                className="bg-transparent focus:outline-none active:outline-none"
+                placeholder="Ask a question..."
+              />
+
+              <IoMdSend
+                onClick={handleButtonClick}
+                className="cursor-pointer"
+              />
             </div>
+          </div>
+        </div> : 
+        <div
+          className={`chat bottom-0 left-0 right-0 top-0 flex flex-col bg-black p-8 max-md:fixed md:hidden ${showMobileChat ? "z-10" : ""}`}
+        >
+          <div className="sticky top-5  flex h-[95vh] flex-col">
+            <CgClose
+              className="absolute right-5 z-50 cursor-pointer text-xl md:hidden"
+              onClick={() => setshowMobileChat(!showMobileChat)}
+            />
+            <h2 className="text-xl font-semibold ">Ask Expert</h2>
+            {!chatResponse && (
+              <div className="flex-1 space-y-4 py-10">
+                {response.map((item, index) => {
+                  return (
+                    <p key={index} className="italic text-gray-400">
+                      {item}
+                    </p>
+                  );
+                })}
+              </div>
+            )}
+            <div className="flex-1 space-y-4 py-10">{chatResponse}</div>
+            <div className=" flex-center-between w-full rounded-full border-2 border-gray-400 px-4 py-2">
+              <input
+                value={input}
+                onChange={(e) => setinput(e.target.value)}
+                onKeyDown={handleEnter}
+                type="text"
+                className="bg-transparent focus:outline-none active:outline-none"
+                placeholder="Ask a question..."
+              />
+
+              <IoMdSend
+                onClick={handleButtonClick}
+                className="cursor-pointer"
+              />
+            </div>
+          </div>
         </div>
-    )
-}
+      }
+    </>
+  );
+};
 
 export default Chat

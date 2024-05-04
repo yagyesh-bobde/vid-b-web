@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, {useState } from "react";
 import Button from "~/components/ui/Button";
-import { getVideoId } from "~/lib/helpers/transcript";
+import { getVideoId } from "~/lib/helpers/other";
 
 const Page = () => {
   const router = useRouter();

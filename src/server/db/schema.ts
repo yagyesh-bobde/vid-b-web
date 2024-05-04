@@ -44,7 +44,7 @@ export const transcriptRows= createTable(
     transcriptText: text("transcriptText").notNull(),
     duration: decimal("duration").notNull(),
     offset: decimal("offset").notNull(),
-    videoId: varchar("videoId", { length: 255 }).notNull().unique(),
+    videoId: varchar("videoId", { length: 255 }).notNull(),
     createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
     updatedAt: timestamp("updatedAt"),
   }
