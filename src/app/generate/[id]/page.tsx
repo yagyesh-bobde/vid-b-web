@@ -8,7 +8,13 @@ import { redirect } from 'next/navigation'
 export default async function  Page({ params } : { params: { id: string } }) {
     
     
-    const getTranscripts = await fetchTranscriptionRows(params.id);
+    const getTranscripts: {
+      transcriptText: string;
+      duration: string;
+      offset: string;
+      videoId: string;
+    }[]
+     = await fetchTranscriptionRows(params.id);
     if (getTranscripts.length == 0) {
       // fetch transcript
       const res = await fetchTranscript(params.id);
@@ -35,9 +41,10 @@ export default async function  Page({ params } : { params: { id: string } }) {
 
       
     }
-    setTimeout(() => {
-      redirect("/video/" + params.id);
-    }, 2000);
+    // setTimeout(() => {
+    redirect("/video/" + params.id);
+      
+    // }, 2000);
     
     return(
         <div className="h-screen grid place-content-center bg-black text-white">

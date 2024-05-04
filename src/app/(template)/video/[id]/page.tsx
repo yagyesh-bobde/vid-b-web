@@ -50,8 +50,8 @@ const Page = ( ) => {
 
   
   return (
-    <div className="flex max-md:h-screen h-full w-screen  bg-black text-white">
-      <div className="video w-full flex h-full flex-col space-y-4  p-8 md:w-3/4">
+    <div className="flex h-full w-screen bg-black  text-white max-md:h-screen">
+      <div className="video flex h-full w-full flex-col space-y-4  p-8 md:w-3/4">
         <h2 className="text-xl font-semibold">
           Video Title: A Sample Video Title
         </h2>
@@ -66,12 +66,11 @@ const Page = ( ) => {
         {vidId.length == 11 && <Transcript transcripts={res} />}
       </div>
 
-     
-        <Chat
-          showMobileChat={showMobileChat}
-          setshowMobileChat={setshowMobileChat}
-        />
-   
+      <Chat
+        showMobileChat={showMobileChat}
+        setshowMobileChat={setshowMobileChat}
+        transcripts={res}
+      />
 
       {!showMobileChat && (
         <div

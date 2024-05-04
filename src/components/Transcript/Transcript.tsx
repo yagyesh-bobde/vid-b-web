@@ -1,12 +1,12 @@
 
 
 import { eq } from 'drizzle-orm';
-import React, { useEffect, useState } from 'react'
-import fetchTranscript, { fetchTranscriptionRows } from '~/lib/helpers/transcript';
-import { db } from '~/server/db';
+import React from 'react'
+// import fetchTranscript, { fetchTranscriptionRows } from '~/lib/helpers/transcript';
+// import { db } from '~/server/db';
 import { useRouter } from 'next/navigation';
-import { transcriptRows, transcriptions } from '~/server/db/schema';
-import { TranscriptProps } from '~/app/(template)/video/[id]/page';
+// import { type transcriptRows, type transcriptions } from '~/server/db/schema';
+import { type TranscriptProps } from '~/app/(template)/video/[id]/page';
 import { BiSolidShareAlt } from "react-icons/bi";
 
 

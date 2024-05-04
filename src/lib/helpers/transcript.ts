@@ -4,17 +4,18 @@
 import { eq } from "drizzle-orm";
 import { YoutubeTranscript } from "youtube-transcript";
 import { db } from "~/server/db";
-import { transcriptRows, transcriptions } from "~/server/db/schema";
+import { transcriptRows } from "~/server/db/schema";
 
 // fetch transcription rows from database
  export const fetchTranscriptionRows = async (id: string) => {
     const transcript = await db
       .select()
       .from(transcriptRows)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       .where(eq(transcriptRows.videoId, id));
     
     // setres(transcript);
-    console.log(transcript)
+    // console.log(transcript)
     return transcript;
   }
 
