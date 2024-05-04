@@ -1,3 +1,6 @@
+'use server'
+
+
 import { YoutubeTranscript } from "youtube-transcript";
 
 const fetchTranscript = async (id: string) => {
@@ -22,6 +25,12 @@ export function getVideoId(videoUrlOrId: string): string {
     // If it's not a YouTube URL, assume it's already a video ID
     return videoUrlOrId;
   }
+}
+
+export function isYouTubeVideoId(input: string) {
+    // Regular expression to match YouTube video ID
+    const regEx = /^[a-zA-Z0-9_-]{11}$/;
+    return regEx.test(input);
 }
 
 

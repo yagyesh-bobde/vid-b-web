@@ -1,9 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React from 'react'
-import fetchTranscript from '~/lib/helpers/transcript';
+import { TranscriptResponse } from 'youtube-transcript';
 
 const page = async () => {
-    const res = await fetchTranscript("WIeJF3kL5ng");
-    console.log(res[0])
+    const response = await fetch("/api/transcript?id=S_F_c9e2bz4");
+    
+    const data = await response.json() as Promise<{
+      status: boolean;
+      message: string;
+      data: TranscriptResponse[] | [];
+    }>;
+
+    console.log(data)
+    const res = (await data).data;
+    console.log(res)
+    if(res.length == 0) {
+      // TODO : TOAST
+      return ;
+    }
     
     return (
         <div>

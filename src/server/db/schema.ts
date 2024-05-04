@@ -1,5 +1,6 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  decimal,
   index,
   integer,
   pgTableCreator,
@@ -24,15 +25,38 @@ export const transcriptions = createTable(
   {
     id: serial("id").primaryKey(),
     // userId: varchar("userId", { length: 255 }).notNull().references(() => users.id),
-    audioUrl: varchar("audioUrl", { length: 255 }).notNull().unique(),
     videoId: varchar("videoId", { length: 255 }).notNull().unique(),
-    conversationId: varchar("conversationId", { length: 255 }),
-    jobId: varchar("jobId", { length: 255 }),
-    transcription: text("transcription"),
+    // conversationId: varchar("conversationId", { length: 255 }),
+    // jobId: varchar("jobId", { length: 255 }),
     createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
     updatedAt: timestamp("updatedAt"),
   }
 )
+
+export const transcriptionsRelations = relations(transcriptions, ({ many }) => ({
+  transcriptRows: many(transcriptRows),
+}));
+
+export const transcriptRows= createTable(
+  "transcriptRows",
+  {
+    id: serial("id").primaryKey(),
+    transcriptText: text("transcriptText").notNull(),
+    duration: decimal("duration").notNull(),
+    offset: decimal("offset").notNull(),
+    videoId: varchar("videoId", { length: 255 }).notNull().unique(),
+    createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
+    updatedAt: timestamp("updatedAt"),
+  }
+)
+
+export const transcriptRowsRelations = relations(transcriptRows, ({ one }) => ({
+   video: one(transcriptions, {
+      fields: [transcriptRows.videoId],
+      references: [transcriptions.videoId],
+   })
+}));
+
 
 export const posts = createTable(
   "post",

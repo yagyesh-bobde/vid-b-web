@@ -1,45 +1,36 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import { useRouter } from "next/navigation";
+import React, {useState } from "react";
 import Button from "~/components/ui/Button";
-import fetchTranscript from "~/lib/helpers/transcript";
+import { getVideoId } from "~/lib/helpers/transcript";
 
 const Page = () => {
-  const [loading, setloading] = useState({
-    isLoading: false,
-    message: "",
-  });
-
+  const router = useRouter();
   const [videoUrl, setvideoUrl] = useState("");
+  const [vidId, setvidId] = useState("")
 
   const handleSubmit = async () => {
-    setloading({ isLoading: true, message: "Converting to audio..." });
-    try {
-        const res = await fetchTranscript("WIeJF3kL5ng");
-        console.log(res);
-
-    }catch (error) {
-      setloading({ isLoading: false, message: "Something went wrong. Please try again." });
-      setvideoUrl("");
+    // router 
+    if(!videoUrl){
+      // TODO : TOAST ENTER VALID VIDEO URL OR ID
+      return;
+    } 
+    if(videoUrl.length > 11){
+      const id = getVideoId(videoUrl);
+      console.log(id)
+      setvidId(id);
+    } else {
+      setvidId(videoUrl);
     }
+    
+    router.push("/generate/" + vidId);
   }
-
-  useEffect(() => {
-    handleSubmit().then((res) => console.log(res)).catch((err) => console.log(err));
-  }, [])
 
   return (
     <div className="relative grid h-screen place-content-center bg-black">
-      {/* <div className='h-[60vh] w-screen bg-red-500 absolute grid grid-cols-3'>
-            <div>
-                
-            </div>
-        </div> */}
-
-      {loading.isLoading && (
-        <div className="absolute left-0 top-0 h-screen w-screen bg-black opacity-50">
-          {<p className="text-center text-white">{loading.message}</p>}
-        </div>
-      )}
+      {/* <div className="absolute left-0 top-0 h-screen w-screen bg-black opacity-50"> */}
+      {/* </div> */}
 
       <div className="flex-col-center-center z-10 gap-5">
         <input
