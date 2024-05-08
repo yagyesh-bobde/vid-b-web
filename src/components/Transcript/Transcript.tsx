@@ -1,10 +1,10 @@
 
 
 import { eq } from 'drizzle-orm';
-import React from 'react'
+import React, { useState } from 'react'
 // import fetchTranscript, { fetchTranscriptionRows } from '~/lib/helpers/transcript';
 // import { db } from '~/server/db';
-import { useRouter } from 'next/navigation';
+
 // import { type transcriptRows, type transcriptions } from '~/server/db/schema';
 import { type TranscriptProps } from '~/app/(template)/video/[id]/page';
 import { BiSolidShareAlt } from "react-icons/bi";
@@ -13,7 +13,17 @@ import { BiSolidShareAlt } from "react-icons/bi";
 
 
 const Transcript = ({ transcripts }: { transcripts: TranscriptProps[] }) => {
-  const router = useRouter();
+
+  const values = {
+    transcript: {
+      title: "Transcript",
+    }, 
+    summary: {
+      title: "Summary"
+    }
+  }
+  const [value, setValue] = useState("transcript")
+
 
   return (
     <div className="transcript overflow-y-scroll max-h-[400px] space-y-5">

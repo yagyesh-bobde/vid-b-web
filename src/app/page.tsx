@@ -8,18 +8,18 @@ import Subscribe from "~/components/Subscribe/Subscribe";
 
 export default function HomePage() {
   return (
-    <main className="space-y-18 relative min-h-screen">
-      <Header />
-      <div className="space-y-32">
-        <Hero />
-        <div className="space-y-44">
-          <Steps />
-          <KeyFeatures />
+      <main className="space-y-18 relative min-h-screen">
+        <Header />
+        <div className="space-y-32">
+          <Hero />
+          <div className="space-y-44">
+            <Steps />
+            <KeyFeatures />
+          </div>
+          <EarlyAdopters />
+          <Subscribe />
+          <Footer />
         </div>
-        <EarlyAdopters />
-        <Subscribe />
-        <Footer />
-      </div>
-    </main>
+      </main>
   );
 }
