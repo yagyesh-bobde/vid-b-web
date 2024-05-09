@@ -6,6 +6,7 @@ import fetchTranscript, { fetchMetaData, fetchTranscriptionRows } from "~/lib/he
 import { redirect } from 'next/navigation'
 import { auth } from "~/auth";
 import { Session } from "next-auth";
+import { textTotext } from "~/lib/helpers/gemini";
 
 export default async function  Page({ params } : { params: { id: string } }) {
     
@@ -23,7 +24,7 @@ export default async function  Page({ params } : { params: { id: string } }) {
       offset: string;
       videoId: string;
     }[]
-     = await fetchTranscriptionRows(params.id);
+     = await fetchTranscriptionRows(params.id, session.userId);
     if (getTranscripts.length == 0) {
       // fetch transcript
       const res = await fetchTranscript(params.id);
@@ -37,6 +38,7 @@ export default async function  Page({ params } : { params: { id: string } }) {
         videoId: string;
       }[] = [];
 
+      let para = ""
       res.forEach((item) => {
         copyRes.push({
           transcriptText: item.text,
@@ -44,9 +46,10 @@ export default async function  Page({ params } : { params: { id: string } }) {
           offset: item.offset.toString(),
           videoId: params.id,
         });
+        para+=item.text
       });
 
-
+      const summary = await textTotext("Summarize the video", para)
 
       await db
         .insert(transcriptions)
@@ -55,6 +58,7 @@ export default async function  Page({ params } : { params: { id: string } }) {
           thumbnail: metaData.thumbnailUrl ?? "",
           channelTitle: metaData.channelTitle ?? "",
           userId: session.userId,
+          summary: summary,
           videoId: params.id,
         })
         .onConflictDoNothing();
@@ -64,7 +68,7 @@ export default async function  Page({ params } : { params: { id: string } }) {
       
     }
     // setTimeout(() => {
-    redirect("/video/" + params.id);
+    redirect("/c/"+ session.userId + "/vid/" + params.id);
       
     // }, 2000);
     

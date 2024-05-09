@@ -20,13 +20,13 @@ const VidGallery = ({
   creator?: string;
 }) => {
   const blankImageUrl =
-    "https://cdn.britannica.com/16/254816-050-41C9577A/Google-logo-Googleplex-headquarters-Mountain-View-California.jpg";
+    "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg";
 
   return (
     <div
-      className={`grid w-full grid-cols-1 gap-8 overflow-scroll sm:grid-cols-2 md:grid-cols-3 lg:max-h-[80vh] xl:grid-cols-4 ${className}`}
+      className={`grid  w-full grid-cols-1 gap-8 overflow-scroll sm:grid-cols-2 md:grid-cols-3 lg:max-h-[80vh] lg:grid-cols-3 ${className}`}
     >
-      {[...videos, ...videos, ...videos, ...videos, ...videos, ...videos].map(
+      {videos.map(
         (video, index) => (
           <VideoCard
             key={index}
@@ -44,14 +44,14 @@ const VidGallery = ({
 const VideoCard = ({
   video,
   hideDetails=false,
-creator=""
+  creator=""
 }: {
   video: {
     id: number | string | undefined;
     title: string | undefined;
     thumbnail: string | undefined;
     channelTitle: string | undefined;
-    videoId: string | undefined;
+    videoId?: string | undefined;
   };
   hideDetails?: boolean;
     creator?: string;
@@ -60,17 +60,30 @@ creator=""
     "https://cdn.britannica.com/16/254816-050-41C9577A/Google-logo-Googleplex-headquarters-Mountain-View-California.jpg";
 
   return (
-    <Link href={`/c/${creator}/vid/${video.videoId}`} className="relative flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-gray-200 cursor-pointer hover:scale-105 duration-300">
-      <Image
-        src={blankImageUrl}
-        alt={video.title ?? "na"}
-        width={240}
-        height={200}
-        className={`w-full rounded-xl ${hideDetails ? "h-[180px]" : ""}`}
-      />
-      <div className={`${hideDetails ? "absolute bottom-0 left-0 p-2 w-full bg-white/50" : ""}`}>
-        <h3 className='font-bold'>{video.title ?? "Video Title"}</h3>
-        <p className='text-gray-600'>@{video.channelTitle ?? "Video Title"}</p>
+    <Link
+      href={`/c/${creator}/vid/${video.videoId}`}
+      className="relative  flex w-full cursor-pointer flex-col justify-center  gap-2 rounded-xl bg-gray-200 bg-transparent duration-300 hover:scale-105"
+    >
+      {video.thumbnail ? (
+        <Image
+          src={video.thumbnail}
+          alt={video.title ?? "na"}
+          width={240}
+          height={200}
+          className={`w-full rounded-t-xl object-cover ${hideDetails ? "h-[130px] w-[240px]" : ""}`}
+        />
+      ) : (
+        <Image
+          src={blankImageUrl}
+          alt={video.title ?? "na"}
+          width={240}
+          height={200}
+          className={`w-full rounded-t-xl ${hideDetails ? "h-[130px] w-[200px]" : ""}`}
+        />
+      )}
+      <div className={`text-white ${hideDetails ? "" : ""}`}>
+        <h3 className="font-bold flex flex-wrap max-w-[250px]">{video.title?.toString().slice(0,50) ?? "Video Title"}</h3>
+        <p className="text-white/60">@{video.channelTitle ?? "Video Title"}</p>
       </div>
     </Link>
   );

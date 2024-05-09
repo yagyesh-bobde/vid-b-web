@@ -39,6 +39,10 @@ const config = {
         protocol: "https",
         hostname: "i.ytimg.com",
       },
+      {
+        protocol: "https",
+        hostname: "t4.ftcdn.net",
+      },
     ],
   },
 };

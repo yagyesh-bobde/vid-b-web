@@ -44,8 +44,8 @@ const Page = () => {
         className="absolute left-0 top-0 z-10 h-full w-full"
       />
       <VidGallery
-        videos={[...themeVideos]}
-        className="xl:grid-cols-3 z-20"
+        videos={themeVideos}
+        className="z-20 gap-x-32"
         hideDetails={true}
       />
 

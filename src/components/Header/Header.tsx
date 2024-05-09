@@ -9,7 +9,9 @@ import { auth } from '~/auth'
 
 
 const Header = async () => {
-  const session = await auth();
+  const session: {
+    userId: string;
+  } | null = await auth();
   if (session) {
     console.log(session)
   }
@@ -33,9 +35,11 @@ const Header = async () => {
         ))}
       </ul>
       <Button className="flex-center gap-5">
-        <Link href="/video/1">
-          {true ? <span>{header.button.title}</span> : <span>Sign in</span>}
-        </Link>
+        {session?.userId ? (
+          <Link href="generate">{header.button.title}</Link>
+        ) : (
+          <Link href="/api/auth/signin">Sign in</Link>
+        )}
       </Button>
     </nav>
   );

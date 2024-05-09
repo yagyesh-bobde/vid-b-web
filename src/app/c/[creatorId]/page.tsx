@@ -47,7 +47,7 @@ export default async function Page({
                 {/* <p>{user.}</p> */}
             </div>
         </div>
-        <VidGallery videos={allVids} creator={params.creatorId} />
+        <VidGallery videos={allVids} creator={params.creatorId} className="xl:grid-cols-4" />
       </div>
     </main>
   );

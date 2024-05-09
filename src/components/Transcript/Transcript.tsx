@@ -1,11 +1,4 @@
-
-
-import { eq } from 'drizzle-orm';
 import React, { useState } from 'react'
-// import fetchTranscript, { fetchTranscriptionRows } from '~/lib/helpers/transcript';
-// import { db } from '~/server/db';
-
-// import { type transcriptRows, type transcriptions } from '~/server/db/schema';
 import { type TranscriptProps } from '~/app/(template)/video/[id]/page';
 import { BiSolidShareAlt } from "react-icons/bi";
 
@@ -27,7 +20,7 @@ const Transcript = ({ transcripts }: { transcripts: TranscriptProps[] }) => {
 
   return (
     <div className="transcript overflow-y-scroll max-h-[400px] space-y-5">
-      <div className="flex-center-between">
+      {/* <div className="flex-center-between">
         <h2 className="cursor-pointer text-xl font-semibold lg:text-2xl">
           Transcript
         </h2>
@@ -37,7 +30,7 @@ const Transcript = ({ transcripts }: { transcripts: TranscriptProps[] }) => {
             Resources
           </h2>
         </div>
-      </div>
+      </div> */}
       <div className="pb-5 text-xl leading-10">
         {
           transcripts.length === 0 && (

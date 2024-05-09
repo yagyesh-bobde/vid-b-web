@@ -86,6 +86,7 @@ export const transcriptions = createTable(
     title: varchar("title", { length: 550 }).notNull(),
     channelTitle: varchar("channelTitle", { length: 550 }).notNull(),
     thumbnail: text("thumbnail").notNull(),
+    summary: text("summary"),
     // conversationId: varchar("conversationId", { length: 255 }),
     // jobId: varchar("jobId", { length: 255 }),
     createdAt: timestamp("createdAt").default(sql`CURRENT_TIMESTAMP`).notNull(),

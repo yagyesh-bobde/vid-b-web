@@ -94,4 +94,20 @@ export const getUser = async (id: string) => {
   return res[0];
 }
 
+
+export const fetchVideoTranscrptDB = async (id: string) => {
+  const res = await db
+  .select()
+  .from(transcriptions)
+  .where(eq(transcriptions.videoId, id));
+
+  if(res.length === 0) {
+    return {
+      videoId: "",
+      summary: ""
+    }
+  }
+  return res[0];
+}
+
 export default fetchTranscript;
