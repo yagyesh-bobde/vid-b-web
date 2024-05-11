@@ -23,7 +23,7 @@ const Header = async () => {
         {header.title}
       </div>
       <ul className="flex-center gap-8 max-md:hidden">
-        {header.links.map((link, index) => (
+        {header.links.map((link) => (
           <Link
             key={link.id}
             className={`${link.active ? "text-black" : "text-black/40"} font-semibold hover:cursor-pointer`}

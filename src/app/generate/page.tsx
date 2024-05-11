@@ -47,10 +47,16 @@ const Page = () => {
       {/* <div className="absolute left-0 top-0 h-screen w-screen bg-black opacity-50"> */}
       {/* </div> */}
       <Image
+        src={"/hero_bg.png"}
+        alt="hero"
+        fill
+        className="absolute z-10 h-full w-full opacity-30"
+      />
+      <Image
         src={"/images/hero/bg.png"}
         alt="hero"
         fill
-        className="absolute left-0 top-0 z-10 h-full w-full"
+        className="absolute z-10 h-full w-full opacity-50"
       />
       {/* <VidGallery
         videos={themeVideos}
