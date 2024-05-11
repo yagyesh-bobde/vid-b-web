@@ -1,17 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-"use client";
+"use server"
 
 import { GoogleGenerativeAI } from "@google/generative-ai"
+import { env } from "~/env";
 
-const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY! ;
+// const apiKey = process.env.! ;
 
-const genAI = new GoogleGenerativeAI("AIzaSyCs3ewwjg6HfeereBUBrWsqfNnH9_a6NPA");
+const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 
-export const textTotext =async (inp: string) =>{
+const prompt =
+  "Analyze this paragraph which is a transcript of a video. Answer user questions based solely on the provided text, avoiding external knowledge. Given Transcript:";
+
+
+export const textTotext =async (inp: string, para: string) =>{
   const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-  const result = await model.generateContent(inp);
+
+  const finalPrompt = prompt + para + "Based on only this answer the following user input: " + inp;
+  // console.log("Para", para)
+  const result = await model.generateContent(finalPrompt);
   const response =result.response;
   const text: string = response.text();
 
