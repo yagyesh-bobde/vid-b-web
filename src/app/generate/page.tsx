@@ -7,16 +7,20 @@ import Button from "~/components/ui/Button";
 import { getVideoId } from "~/lib/helpers/other";
 import themeVideos from "./data";
 import Image from "next/image";
+import { useToast } from "~/components/ui/use-toast";
 
 const Page = () => {
   const router = useRouter();
   const [videoUrl, setvideoUrl] = useState("");
   const [vidId, setvidId] = useState("")
-
+  const { toast } = useToast();
   const handleSubmit = async () => {
     // router 
     if(!videoUrl){
       // TODO : TOAST ENTER VALID VIDEO URL OR ID
+      toast({
+        title: "Please Enter a Valid Video URL or ID"
+      });
       return;
     } 
     if(videoUrl.length > 11){
@@ -26,6 +30,11 @@ const Page = () => {
     } else {
       setvidId(videoUrl);
     }
+
+    toast({
+      title: "Generating SupaClip Page",
+      description: "Please wait while we generate webpage for your video. If nothing happens for 5-10 seconds please press again.",
+    })
     
     router.push("/generate/" + vidId);
   }

@@ -14,6 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import Link from "next/link";
 
 import { TiArrowBack } from "react-icons/ti";
+import { useToast } from "~/components/ui/use-toast";
 
 export interface TranscriptProps {
   videoId: string;
@@ -27,6 +28,7 @@ export interface TranscriptProps {
 
 interface Transcription {
   id: number;
+  title: string;
   videoId: string;
   summary: string | null;
 }
@@ -34,6 +36,28 @@ interface Transcription {
 const Page = () => {
   // const location
   const router = useRouter();
+  
+  
+  const { toast } = useToast();
+  const showToast = () => {
+    toast({
+      title: "Resources Availabe Soon",
+      description: "We are working on making this feature available soon.",
+    });
+  }
+
+  const copyToClipboard = async() => {
+    const url = window.location.href;
+
+    const res = await navigator.clipboard.writeText(url)
+
+    toast({
+      title: "Link Copied",
+      description: "The link has been copied to your clipboard",
+    })
+  }
+
+
   const [showMobileChat, setshowMobileChat] = useState(false);
   const [res, setres] = useState<TranscriptProps[] | []>([]);
   const [vidId, setvidId] = useState("");
@@ -41,9 +65,12 @@ const Page = () => {
   
   const [transcript, settranscript] = useState<Transcription>({
     id: 0,
+    title: "",
     videoId: "",
     summary: "" 
   })
+
+
 
   useEffect(() => {
     // get the video id from the url
@@ -69,6 +96,7 @@ const Page = () => {
       if(res) {
         settranscript({
           id: res.id,
+          title: res.title ?? "Video Sample Title",
           videoId: res.videoId,
           summary: res.summary,
         });
@@ -93,7 +121,7 @@ const Page = () => {
       <div className="video flex h-full w-full flex-col space-y-4  p-8 md:w-3/4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">
-            Video Title: A Sample Video Title
+            {transcript.title}
           </h2>
           <div className="flex gap-8">
             <div
@@ -129,8 +157,11 @@ const Page = () => {
               <TabsTrigger value="summary">Summary</TabsTrigger>
             </TabsList>
             <div className="flex items-center gap-5">
-              <BiSolidShareAlt className="cursor-pointer text-xl" />
-              <h2 className="text-md cursor-pointer font-semibold opacity-50 lg:text-lg">
+              <BiSolidShareAlt className="cursor-pointer text-xl" onClick={copyToClipboard} />
+              <h2
+                onClick={showToast}
+                className="text-md cursor-pointer font-semibold opacity-50 lg:text-lg"
+              >
                 Resources
               </h2>
             </div>
@@ -158,6 +189,8 @@ const Page = () => {
           <BiQuestionMark className="animate-bounce text-4xl text-black" />
         </div>
       )}
+
+      {/* <Toaster /> */}
     </div>
   );
 };

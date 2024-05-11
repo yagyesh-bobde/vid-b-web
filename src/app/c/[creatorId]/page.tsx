@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm";
+import { Share, Share2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -24,8 +25,10 @@ export default async function Page({
   if(!user) {
     return redirect("/")
   }
-
   const session = await auth();
+  // const { toast } = useToast();
+
+
 
   // console.log(user)
   const allVids = await db
@@ -58,14 +61,17 @@ export default async function Page({
           </div>
 
           {/* button */}
-          {session?.userId == params.creatorId ? (
-            <Link href="/generate">
-              <Button className="space-x-2 bg-white text-black">
-                <CgAdd className="text-xl" />
-                <span>Add Video</span>
-              </Button>
-            </Link>
-          ) : null}
+          <div className="flex items-center gap-4 ">
+            {session?.userId == params.creatorId ? (
+              <Link href="/generate">
+                <Button className="space-x-2 bg-white text-black">
+                  <CgAdd className="text-xl" />
+                  <span>Add Video</span>
+                </Button>
+              </Link>
+            ) : null}
+            {/* <Share2Icon className="text-white"  /> */}
+          </div>
         </div>
         <VidGallery
           videos={allVids}

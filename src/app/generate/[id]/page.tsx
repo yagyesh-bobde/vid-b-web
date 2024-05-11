@@ -71,21 +71,21 @@ export default async function  Page({ params } : { params: { id: string } }) {
 
       
     }
-    // setTimeout(() => {
-    redirect("/c/"+ session.userId + "/vid/" + params.id);
-      
-    // }, 2000);
+
+    redirect("/c/" + session.userId + "/vid/" + params.id);
     
-    return(
-        <div className="h-screen grid place-content-center bg-black text-white">
-            <div className="flex flex-col items-center justify-center gap-10">
-                <div className="w-[150px] h-[150px] rounded-full border-t-2 border-white animate-spin">
+      
+    
+    // return(
+    //     <div className="h-screen grid place-content-center bg-black text-white">
+    //         <div className="flex flex-col items-center justify-center gap-10">
+    //             <div className="w-[150px] h-[150px] rounded-full border-t-2 border-white animate-spin">
                     
-                </div>
-                <div className="text-2xl animate-pulse">
-                    Generating website for your video
-                </div>
-            </div>
-        </div>
-    )
+    //             </div>
+    //             <div className="text-2xl animate-pulse">
+    //                 Generating website for your video
+    //             </div>
+    //         </div>
+    //     </div>
+    // )
 }
