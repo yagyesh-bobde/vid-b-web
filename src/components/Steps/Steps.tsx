@@ -17,7 +17,7 @@ const Steps = () => {
                 </div> {steps.title[1]}
             </Title>
 
-            <div className='flex-col-center-center gap-8'>
+            <div className='flex-col-center-center gap-8 items-stretch'>
                 {steps.steps.map((step) => {
                   return(
                     <StepCard key={step.id} step={step} />
