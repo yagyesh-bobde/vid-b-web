@@ -19,8 +19,8 @@ const Title = ({
       <h2
         className={`${
           variant == "lg"
-            ? "text-3xl sm:text-4xl lg:text-5xl"
-            : "text-3xl sm:text-5xl lg:text-7xl"
+            ? "text-2xl sm:text-3xl lg:text-4xl"
+            : "text-2xl sm:text-4xl lg:text-6xl"
         }  font-bold leading-loose`}
         style={{
           lineHeight: "1.25"
