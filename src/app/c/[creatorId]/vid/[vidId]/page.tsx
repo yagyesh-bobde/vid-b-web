@@ -38,6 +38,7 @@ const Page = () => {
   const [res, setres] = useState<TranscriptProps[] | []>([]);
   const [vidId, setvidId] = useState("");
   const [para, setpara] = useState("")
+  
   const [transcript, settranscript] = useState<Transcription>({
     id: 0,
     videoId: "",
@@ -65,12 +66,18 @@ const Page = () => {
       setpara(text);
 
       const res = await fetchVideoTranscrptDB(id);
-      settranscript({
-        id: res.id,
-        videoId: res.videoId,
-        summary: res.summary,
-      });
+      if(res) {
+        settranscript({
+          id: res.id,
+          videoId: res.videoId,
+          summary: res.summary,
+        });
+      }
+
+      
     };
+
+    
 
     const path: string = window.location.pathname;
     const parts: string[] = path.split("/");

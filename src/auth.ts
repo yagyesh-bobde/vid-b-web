@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"

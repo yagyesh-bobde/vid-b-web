@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use server'
 
 
@@ -37,7 +38,7 @@ import fetchYoutubeMetadata from 'yt_metadata'
       .fullJoin(transcriptRows, eq(transcriptions.videoId, transcriptRows.videoId))
       .fullJoin(users, eq(transcriptions.userId, users.id))
 
-      console.log(res)
+      // console.log(res)
     // setres(transcript);
     // console.log(transcript)
     return transcript;
@@ -45,7 +46,7 @@ import fetchYoutubeMetadata from 'yt_metadata'
 
 export const fetchTranscript = async (id: string) => {
     const res = await YoutubeTranscript.fetchTranscript(id);
-    console.log(res[1])
+    // console.log(res[1])
     // const json = await res.json();
     // console.log(json)
     return res
@@ -53,36 +54,20 @@ export const fetchTranscript = async (id: string) => {
 
 export const fetchMetaData = async(id: string): Promise<
   {
-    mediaType: string;
-    thumbnailUrl: string;
     title: string;
-    channelTitle: string;
-    viewCount: string;
-    likeCount: string;
+    author_name: string;
+    provider_name: string;
+    thumbnail_url: string;
   }
 > => {
-  /*
-    {
-  mediaType: 'video',
-  thumbnailUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/sddefault.jpg',
-  title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)',
-  channelTitle: 'Rick Astley',
-  viewCount: '1478540522',
-  likeCount: '17094295'
-}
-  */
   const url = 'https://www.youtube.com/watch?v=' + id; // Example YouTube video URL
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const data : {
-    mediaType: string;
-    thumbnailUrl: string;
-    title: string;
-    channelTitle: string;
-    viewCount: string;
-    likeCount: string;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  } = await fetchYoutubeMetadata(url)
-  return data;
+  const fetchUrl = `https://youtube.com/oembed?url=${url}&format=json`
+  const data = await fetch(fetchUrl)
+
+  const res = await data.json();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return res;
 } 
 
 
@@ -101,12 +86,7 @@ export const fetchVideoTranscrptDB = async (id: string) => {
   .from(transcriptions)
   .where(eq(transcriptions.videoId, id));
 
-  if(res.length === 0) {
-    return {
-      videoId: "",
-      summary: ""
-    }
-  }
+  
   return res[0];
 }
 

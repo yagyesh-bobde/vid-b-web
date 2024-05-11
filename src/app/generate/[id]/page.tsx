@@ -5,8 +5,8 @@ import { transcriptRows, transcriptions } from "~/server/db/schema";
 import fetchTranscript, { fetchMetaData, fetchTranscriptionRows } from "~/lib/helpers/transcript";
 import { redirect } from 'next/navigation'
 import { auth } from "~/auth";
-import { Session } from "next-auth";
 import { textTotext } from "~/lib/helpers/gemini";
+
 
 export default async function  Page({ params } : { params: { id: string } }) {
     
@@ -30,6 +30,7 @@ export default async function  Page({ params } : { params: { id: string } }) {
       const res = await fetchTranscript(params.id);
 
       const metaData = await fetchMetaData(params.id);
+      console.log(metaData)
 
       const copyRes: {
         transcriptText: string;
@@ -38,7 +39,10 @@ export default async function  Page({ params } : { params: { id: string } }) {
         videoId: string;
       }[] = [];
 
+      
       let para = ""
+
+
       res.forEach((item) => {
         copyRes.push({
           transcriptText: item.text,
@@ -50,13 +54,13 @@ export default async function  Page({ params } : { params: { id: string } }) {
       });
 
       const summary = await textTotext("Summarize the video", para)
-
+      
       await db
         .insert(transcriptions)
         .values({
-          title: metaData.title ?? "",
-          thumbnail: metaData.thumbnailUrl ?? "",
-          channelTitle: metaData.channelTitle ?? "",
+          title: metaData.title,
+          thumbnail: metaData.thumbnail_url,
+          channelTitle: metaData.author_name,
           userId: session.userId,
           summary: summary,
           videoId: params.id,

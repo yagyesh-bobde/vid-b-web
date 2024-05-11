@@ -13,7 +13,7 @@ const Header = async () => {
     userId: string;
   } | null = await auth();
   if (session) {
-    console.log(session)
+    // console.log(session)
   }
   const { header } = content.home;
   return (

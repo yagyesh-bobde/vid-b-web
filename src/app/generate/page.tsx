@@ -43,11 +43,11 @@ const Page = () => {
         fill
         className="absolute left-0 top-0 z-10 h-full w-full"
       />
-      <VidGallery
+      {/* <VidGallery
         videos={themeVideos}
         className="z-20 gap-x-32"
         hideDetails={true}
-      />
+      /> */}
 
       <div className="flex-col-center-center z-10 gap-5">
         <input

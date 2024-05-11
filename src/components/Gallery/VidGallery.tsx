@@ -78,11 +78,13 @@ const VideoCard = ({
           alt={video.title ?? "na"}
           width={240}
           height={200}
-          className={`w-full rounded-t-xl ${hideDetails ? "h-[130px] w-[200px]" : ""}`}
+          className={`w-full rounded-t-xl ${hideDetails ? "h-[130px] w-[240px]" : ""}`}
         />
       )}
       <div className={`text-white ${hideDetails ? "" : ""}`}>
-        <h3 className="font-bold flex flex-wrap max-w-[250px]">{video.title?.toString().slice(0,50) ?? "Video Title"}</h3>
+        <h3 className="flex max-w-[250px] flex-wrap font-bold">
+          {video.title?.toString().slice(0, 50) ?? "Video Title"}
+        </h3>
         <p className="text-white/60">@{video.channelTitle ?? "Video Title"}</p>
       </div>
     </Link>
