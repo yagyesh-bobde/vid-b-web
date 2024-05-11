@@ -46,8 +46,8 @@ const content = {
             
         },
         "hero": {
-            "title": ["Simplify your daily", "routine."],
-            "subtitle": "With its sleek design and advanced features at more convenient way.",
+            "title": ["Instantly turn your videos into", "searchable resources."],
+            "subtitle": "Summarize, transcripts, timestamps & AI assistant for your videos are just a click away",
             "button": "Get Started ->",
             "more": "More 200+ users are having more fun"
         },
@@ -56,27 +56,27 @@ const content = {
             "steps": [
                 {
                     "id": 1, 
-                    "title": "User-generated content",
-                    "desc": "Encourage customers to share photos or videos of themselves using the product and tag your brand", 
-                    "button": "Join Free ->",
+                    "title": "Summary Article",
+                    "desc": "Quickly understand the main points through a short video summary", 
+                    "button": "Join Free",
                     "type": 1,
                     "boxOut" : "bg-light-blue",
                     "boxIn" : "bg-lighter-blue"
                 },
                 {
                     "id": 2, 
-                    "title": "Product photos/ videos",
-                    "desc": "Share high-quality photos or videos of the product, showcasing its features and benefits.", 
-                    "button": "Join Free ->",
+                    "title": "Ai Assistant",
+                    "desc": "Chat with an AI assistant trained on your video content.", 
+                    "button": "Join Free",
                     "type": 2,
                     "boxOut" : "bg-light-pink",
                     "boxIn" : "bg-lighter-pink"
                 },
                 {
                     "id": 3, 
-                    "title": "Influencer collaboration",
-                    "desc": "Partner with influencers or bloggers who have a strong following in your target market to promote the product on their social media accounts.", 
-                    "button": "Join Free ->",
+                    "title": "Transcript & Timestamp",
+                    "desc": "Get complete transcript with timestamps to easily navigate the video.", 
+                    "button": "Join Free",
                     "type": 2,
                     "boxOut" : "bg-light-darkBlue",
                     "boxIn" : "bg-lighter-darkBlue"
