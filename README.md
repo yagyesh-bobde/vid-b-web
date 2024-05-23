@@ -1,8 +1,12 @@
-# Vid-B-Web
-This is a product for creators to instantly create a landing page for their videos. And it also provides a custom chat support for your videos which answers users questions in real time.
+*Disclaimer: This code repo is older version of the current production build of this application and dosen't contain all the updated changes and has a lot of bugs. Since it is not possible to share the current repository as a whole. The link for the live tool is: https://www.supaclip.pro*
 
+# Vid-B-Web (Now Supaclip.pro)
+This is a product for creators to instantly create a landing page for their videos. And it also provides a custom chat support for your videos which answers users questions in real time. 
 
-<iframe width="700" height="450" src="https://youtu.be/embed/fBqrn4nXFlc" ></iframe>
+Watch the live demo here:
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=fBqrn4nXFlc" target="_blank">
+ <img src="http://img.youtube.com/vi/fBqrn4nXFlc/mqdefault.jpg" alt="Watch the video" width="440" height="380" border="10" />
+</a>
 
 
 ## TODOS
@@ -31,4 +35,5 @@ NEXT_AUTH_URL=<your secret>
 ```
 4. Run `pnpm start`
 5. Open `http://localhost:3000` in your browser
+
 
