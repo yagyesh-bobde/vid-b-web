@@ -1,6 +1,9 @@
 # Vid-B-Web
 This is a product for creators to instantly create a landing page for their videos. And it also provides a custom chat support for your videos which answers users questions in real time.
 
+<iframe width="700" height="450" src="https://youtu.be/embed/fBqrn4nXFlc" />
+
+
 ## TODOS
 - [x] Initialize project (w/ t3-stack)
 - [x] Upload to github (w/ github)
